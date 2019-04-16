@@ -7,6 +7,7 @@ class App extends Component {
     super()
     this.state = {
       total: 0,
+      // ingredients:{},
       brood: [
         {
           id:1,
@@ -65,11 +66,18 @@ class App extends Component {
     addItem = (e) => {
       console.log(e.currentTarget.id);
       console.log(e.currentTarget.name);
-      let changePrice =  parseFloat(e.currentTarget.className);
-
+      let changePrice = parseFloat(e.currentTarget.className)
       this.setState((prevState) => ({
 				total: parseFloat(prevState.total) + changePrice
-			}))
+      }))
+    }
+
+    deleteItem = (e) => {
+      let changePriceDelete = parseFloat(e.currentTarget.className);
+
+      this.setState((prevState) => ({
+        total: parseFloat(prevState.total) - changePriceDelete
+      }))
     }
 
 
@@ -79,7 +87,8 @@ class App extends Component {
   let listOfBrood = this.state.brood.map((br, index) => {
     return(
       <li key={index}>{br.name}: {br.price} 
-      <button key={index} id={br.id} name={br.name} className={br.price} onClick={this.addItem}> + </button>
+      <button  id={br.id} name={br.name} className={br.price} onClick={this.addItem}> + </button>
+      <button id={br.id} name={br.name} className={br.price} onClick={this.deleteItem}> - </button>
       </li>
     )
   })
@@ -87,7 +96,8 @@ class App extends Component {
   let listOfVlees = this.state.vlees.map((vl, index) => {
     return(
       <li key={index}>{vl.name}: {vl.price}
-      <button key={index} id={vl.id} name={vl.name} className={vl.price} onClick={this.addItem}> + </button>
+      <button id={vl.id} name={vl.name} className={vl.price} onClick={this.addItem}> + </button>
+      <button  id={vl.id} name={vl.name} className={vl.price} onClick={this.deleteItem}> - </button>
       </li>
     )
   })
@@ -95,7 +105,8 @@ class App extends Component {
   let listOfDiversen = this.state.diversen.map((di, index) => {
     return(
       <li key={index}>{di.name}: {di.price}
-      <button key={index} id={di.id} name={di.name} className={di.price} onClick={this.addItem}> + </button>
+      <button id={di.id} name={di.name} className={di.price} onClick={this.addItem}> + </button>
+      <button  id={di.id} name={di.name} className={di.price} onClick={this.deleteItem}> - </button>
       </li>
   )
   })
@@ -114,7 +125,7 @@ class App extends Component {
         <h2>Diversen</h2>
           <ul>{listOfDiversen}
           </ul>
-          <div></div>
+          {/* <div>{ingredients}</div> */}
         <div>total: {this.state.total}</div>
       </div>
     )
