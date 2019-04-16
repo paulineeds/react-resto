@@ -6,6 +6,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      total: 0,
       brood: [
         {
           id:1,
@@ -59,30 +60,62 @@ class App extends Component {
       ]
     }
   }
-    addItem = () => {
-      console.log('clicked',this);
-     
+
+
+    addItem = (e) => {
+      console.log(e.currentTarget.id);
+      console.log(e.currentTarget.name);
+      let changePrice =  parseFloat(e.currentTarget.className);
+
+      this.setState((prevState) => ({
+				total: parseFloat(prevState.total) + changePrice
+			}))
     }
+
+
 
   // Pure functies en javascript
   render() {
-    // console.log(this.state)
-    // console.log(this.state.brood)
+  let listOfBrood = this.state.brood.map((br, index) => {
+    return(
+      <li key={index}>{br.name}: {br.price} 
+      <button key={index} id={br.id} name={br.name} className={br.price} onClick={this.addItem}> + </button>
+      </li>
+    )
+  })
+
+  let listOfVlees = this.state.vlees.map((vl, index) => {
+    return(
+      <li key={index}>{vl.name}: {vl.price}
+      <button key={index} id={vl.id} name={vl.name} className={vl.price} onClick={this.addItem}> + </button>
+      </li>
+    )
+  })
+
+  let listOfDiversen = this.state.diversen.map((di, index) => {
+    return(
+      <li key={index}>{di.name}: {di.price}
+      <button key={index} id={di.id} name={di.name} className={di.price} onClick={this.addItem}> + </button>
+      </li>
+  )
+  })
+
 
     // HTML DINGES
     return (
       <div>
         <h1>Burgers</h1>
         <h2>Broodjes</h2>
-          <ul> {this.state.brood.map(br => (<li key={br.id}>{br.name}: {br.price} <button> + </button></li>))}
+          <ul> {listOfBrood}
           </ul>
         <h2>Burgers</h2>
-          <ul>{this.state.vlees.map(vl => (<li key={vl.id}>{vl.name}: {vl.price} <button onClick={this.addItem}> + </button></li>))}
+          <ul>{listOfVlees}
           </ul>
         <h2>Diversen</h2>
-          <ul>{this.state.diversen.map(di => (<li key={di.id}>{di.name}: {di.price} <button> + </button></li>))}
+          <ul>{listOfDiversen}
           </ul>
-        <div></div>
+          <div></div>
+        <div>total: {this.state.total}</div>
       </div>
     )
   }
