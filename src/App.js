@@ -7,7 +7,7 @@ class App extends Component {
     super()
     this.state = {
       total: 0,
-      // ingredients:{},
+      ingredients:[],
       brood: [
         {
           id:1,
@@ -62,11 +62,18 @@ class App extends Component {
     }
   }
 
+    reset = () => {
+      this.setState (() => ({
+        total: 0
+      }))
+    }
 
     addItem = (e) => {
       console.log(e.currentTarget.id);
       console.log(e.currentTarget.name);
+
       let changePrice = parseFloat(e.currentTarget.className)
+
       this.setState((prevState) => ({
 				total: parseFloat(prevState.total) + changePrice
       }))
@@ -80,6 +87,17 @@ class App extends Component {
       }))
     }
 
+    addIngredients = () => {
+      // if (this.addItem = 'clicked'){
+      //   ingredients.push(this.name)
+      this.setState(state => {
+        if (this.addItem = 'clicked'){
+        // let ingredients = state.ingredients.push(this.name)
+        let ingredients = this.name.push(state.ingredients)
+        }
+      })
+    }
+
 
 
   // Pure functies en javascript
@@ -87,7 +105,7 @@ class App extends Component {
   let listOfBrood = this.state.brood.map((br, index) => {
     return(
       <li key={index}>{br.name}: {br.price} 
-      <button  id={br.id} name={br.name} className={br.price} onClick={this.addItem}> + </button>
+      <button  id={br.id} name={br.name} className={br.price} onClick={this.addItem} > + </button>
       <button id={br.id} name={br.name} className={br.price} onClick={this.deleteItem}> - </button>
       </li>
     )
@@ -125,8 +143,9 @@ class App extends Component {
         <h2>Diversen</h2>
           <ul>{listOfDiversen}
           </ul>
-          {/* <div>{ingredients}</div> */}
+          <div>[ingredients]</div>
         <div>total: {this.state.total}</div>
+        <div><button id="reset" onClick={this.reset}>reset</button></div>
       </div>
     )
   }
