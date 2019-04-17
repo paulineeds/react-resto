@@ -92,8 +92,8 @@ class App extends Component {
       //   ingredients.push(this.name)
       this.setState(state => {
         if (this.addItem = 'clicked'){
-        // let ingredients = state.ingredients.push(this.name)
-        let ingredients = this.name.push(state.ingredients)
+        let ingredients = state.ingredients.push(this.name)
+        
         }
       })
     }
