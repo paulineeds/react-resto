@@ -99,7 +99,6 @@ class App extends Component {
     }
 
 
-
   // Pure functies en javascript
   render() {
   let listOfBrood = this.state.brood.map((br, index) => {
